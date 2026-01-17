@@ -1,213 +1,228 @@
-# DLL Injector/Unloader
+# DLL Injector GUI
 
-A powerful DLL injection and unloading tool that supports both x86 and x64 processes on Windows.
+A modern **Windows 11 styled** dark-themed GUI application for injecting and unloading DLLs in both x86 and x64 processes.
 
 ## Features
 
-- ✅ **Process Listing**: View all running processes with their PID, name, and architecture (x86/x64)
-- ✅ **DLL Injection**: Inject DLLs into running processes using LoadLibrary technique
-- ✅ **DLL Unloading**: Unload DLLs from running processes by name using FreeLibrary
-- ✅ **Architecture Support**: Separate builds for x86 and x64 processes
-- ✅ **Process Search**: Find processes by name or PID
-- ✅ **Architecture Detection**: Automatically detects if target process is 32-bit or 64-bit
-- ✅ **Interactive Menu**: User-friendly command-line interface
+✅ **Modern Dark UI** - Beautiful Windows 11 inspired dark theme with rounded corners
+✅ **Native Windows Integration** - Uses Windows 11 visual styles and theming
+✅ **Process Browser** - View all running processes with search and filter capabilities
+✅ **Architecture Detection** - Automatic detection and display of process architecture (x86/x64)
+✅ **Compatibility Checking** - Visual indicators showing which processes are compatible
+✅ **DLL Injection** - Inject DLLs using LoadLibrary technique
+✅ **DLL Unloading** - Unload DLLs by name using FreeLibrary
+✅ **File Browser** - Built-in file browser for selecting DLL files
+✅ **Status Feedback** - Real-time status updates and detailed error messages
+✅ **Search & Filter** - Search processes by name and filter by architecture
+✅ **Smooth Animations** - Hover effects and visual feedback
 
-## Architecture Requirements
+## Screenshots
 
-**Important**: You must use the correct architecture build for your target process:
-- Use the **x64 build** to inject into 64-bit processes
-- Use the **x86 build** to inject into 32-bit processes
-
-The tool will warn you if there's an architecture mismatch.
+### Main Window Features:
+- **Process List** with columns for PID, Name, Architecture, and Compatibility Status
+- **Search Box** for quick process filtering
+- **Architecture Filter** dropdown (All / x64 Only / x86 Only)
+- **Refresh Button** to update the process list (F5)
+- **DLL Path Input** with Browse button for injection
+- **DLL Name Input** for unloading specific DLLs
+- **Inject/Unload Buttons** for performing actions
+- **Status Bar** showing current operation status
 
 ## Building
 
 ### Prerequisites
 
-- Windows 10/11
+- **Windows 10 (1903+) or Windows 11** (for best dark theme support)
 - Visual Studio 2019 or 2022 (with C++ desktop development workload)
 - CMake 3.15 or higher
 - VSCode (optional, but configured)
 
-### Build from Command Line
+> **Note**: The dark theme and rounded corners look best on Windows 11. On Windows 10, the interface will still be dark but without rounded window corners.
 
-**Note:** The project is configured for Visual Studio 2019. If you have VS2022, change `"Visual Studio 16 2019"` to `"Visual Studio 17 2022"` in the commands below.
+### Quick Build
 
-#### x64 Build
+**Option 1: Use the build script (Easiest)**
 ```cmd
-# Configure
-cmake -S . -B build-x64 -G "Visual Studio 16 2019" -A x64
-
-# Build Debug
-cmake --build build-x64 --config Debug
-
-# Build Release
-cmake --build build-x64 --config Release
+build.bat
 ```
+Choose option 2 for x64 Release or option 4 for x86 Release.
 
-#### x86 Build
+**Option 2: Command line**
 ```cmd
-# Configure
+# x64 Release
+cmake -S . -B build-x64 -G "Visual Studio 16 2019" -A x64
+cmake --build build-x64 --config Release
+
+# x86 Release  
 cmake -S . -B build-x86 -G "Visual Studio 16 2019" -A Win32
-
-# Build Debug
-cmake --build build-x86 --config Debug
-
-# Build Release
 cmake --build build-x86 --config Release
 ```
 
-### Build from VSCode
+**Option 3: VSCode**
+- Open folder in VSCode
+- Press `Ctrl+Shift+B` to build
+- Press `F5` to run with debugger
 
-The project is fully configured for VSCode:
+### Build Output
 
-1. Open the project folder in VSCode
-2. Press `Ctrl+Shift+P` and select:
-   - `Tasks: Run Build Task` to build (default: x64 Release)
-   - Or select specific tasks:
-     - `Build x64 Debug`
-     - `Build x64 Release`
-     - `Build x86 Debug`
-     - `Build x86 Release`
-
-### Running from VSCode
-
-Press `F5` and select:
-- `Debug x64` - Run x64 debug build
-- `Debug x86` - Run x86 debug build
-- `Release x64` - Run x64 release build
-- `Release x86` - Run x86 release build
+The executables will be located at:
+- **x64 build**: `build-x64/bin/Release/DllInjectorGUI.exe`
+- **x86 build**: `build-x86/bin/Release/DllInjectorGUI.exe`
 
 ## Usage
 
-### Running the Application
+### Getting Started
 
-**Important**: The injector requires **Administrator privileges** to inject into other processes.
+1. **Run as Administrator**
+   - Right-click `DllInjectorGUI.exe` → "Run as administrator"
+   - Administrator privileges are required to inject into other processes
 
-1. Run the executable as Administrator:
-   - Right-click `DllInjector.exe` → "Run as administrator"
+2. **Select Target Process**
+   - Browse the process list or use the search box
+   - Click on a process to select it
+   - Check the "Status" column for compatibility
 
-2. The main menu will appear:
-   ```
-   Menu:
-   1. List all processes
-   2. Inject DLL
-   3. Unload DLL
-   4. Exit
-   ```
+3. **Inject a DLL**
+   - Click "Browse..." to select your DLL file (or type the path)
+   - Ensure the DLL architecture matches the target process
+   - Click "Inject DLL"
+   - A success/error message will appear
 
-### Injecting a DLL
+4. **Unload a DLL**
+   - Select the target process
+   - Enter the DLL filename (e.g., `MyMod.dll`)
+   - Click "Unload DLL"
 
-1. Select option `2` from the menu
-2. Enter the target process PID (or `0` to search by name)
-3. If searching by name:
-   - Enter the process name (e.g., `notepad.exe`)
-   - Select from found processes if multiple exist
-4. Enter the full path to your DLL file
-   - Example: `C:\MyDlls\MyMod.dll`
-   - You can drag-and-drop the DLL file into the console
-5. The tool will inject the DLL and report success/failure
+### Tips
 
-### Unloading a DLL
+- **Use F5** to quickly refresh the process list
+- **Double-click** a process to select it
+- **Use the search box** to filter processes by name
+- **Use architecture filter** to show only x64 or x86 processes
+- **Check the status column** to verify compatibility before injection
 
-1. Select option `3` from the menu
-2. Enter the target process PID (or `0` to search by name)
-3. If searching by name:
-   - Enter the process name (e.g., `notepad.exe`)
-   - Select from found processes if multiple exist
-4. Enter the DLL name to unload (e.g., `MyMod.dll`)
-   - This is just the filename, not the full path
-5. The tool will unload the DLL and report success/failure
+## Architecture Requirements
 
-### Listing Processes
+**Critical**: You must use the correct architecture build:
+- Use **x64 build** (`DllInjectorGUI_x64.exe`) for 64-bit processes
+- Use **x86 build** (`DllInjectorGUI_x86.exe`) for 32-bit processes
 
-1. Select option `1` from the menu
-2. View all running processes with:
-   - Process ID (PID)
-   - Process name
-   - Architecture (x86 or x64)
+The GUI will warn you with a visual indicator and error message if there's a mismatch.
+
+## Interface Guide
+
+### Process List Columns
+
+| Column | Description |
+|--------|-------------|
+| **PID** | Process ID |
+| **Process Name** | Executable name |
+| **Architecture** | x64 or x86 |
+| **Status** | Compatibility check with current injector build |
+
+### Status Indicators
+
+- ✓ **Compatible** - Safe to inject (architecture matches)
+- ✗ **Architecture mismatch** - Need different injector build
+
+### Menu Options
+
+**File Menu:**
+- Refresh (F5) - Reload process list
+- Exit - Close application
+
+**Help Menu:**
+- About - Show application information
+
+## Technical Details
+
+### GUI Framework
+- Pure Win32 API (no external dependencies)
+- **Windows 11 Dark Theme** with DWM integration
+- **Rounded Corners** using DWM attributes
+- Common Controls 6.0 with custom dark mode rendering
+- **Modern Segoe UI font** (Windows 11 default)
+- **Custom owner-draw buttons** with hover effects
+- **Dark ListView** with custom colors
+
+### Injection Method
+Same as console version:
+1. Opens target process with appropriate permissions
+2. Allocates memory in target process
+3. Writes DLL path to allocated memory
+4. Creates remote thread calling `LoadLibraryW`
+5. Waits for completion and cleans up
+
+### Unloading Method
+1. Searches for module in target process
+2. Gets module base address (HMODULE)
+3. Creates remote thread calling `FreeLibrary`
+4. Waits for completion
 
 ## Project Structure
 
 ```
-DllInjector/
-├── CMakeLists.txt          # Main CMake configuration
+DllInjectorGUI/
+├── CMakeLists.txt          # CMake configuration
+├── build.bat               # Build script
 ├── .vscode/                # VSCode configuration
-│   ├── tasks.json          # Build tasks
-│   ├── launch.json         # Debug configurations
-│   ├── c_cpp_properties.json
-│   └── settings.json
+│   ├── tasks.json
+│   └── launch.json
 ├── include/                # Header files
+│   ├── main_window.h
 │   ├── process_manager.h
-│   └── injector.h
+│   ├── injector.h
+│   └── resource.h
 ├── src/                    # Source files
 │   ├── main.cpp
+│   ├── main_window.cpp
 │   ├── process_manager.cpp
 │   └── injector.cpp
-├── build-x64/             # x64 build output (generated)
-└── build-x86/             # x86 build output (generated)
+└── resources/              # Resource files
+    └── resource.rc         # Windows resources (menu, version info)
 ```
-
-## Technical Details
-
-### Injection Method
-
-The injector uses the classic **LoadLibrary** technique:
-1. Opens the target process with appropriate permissions
-2. Allocates memory in the target process
-3. Writes the DLL path to the allocated memory
-4. Creates a remote thread that calls `LoadLibraryW`
-5. Waits for the thread to complete
-6. Cleans up allocated resources
-
-### Unloading Method
-
-The unloader uses the **FreeLibrary** technique:
-1. Opens the target process
-2. Searches for the module in the target process's module list
-3. Gets the module's base address (HMODULE)
-4. Creates a remote thread that calls `FreeLibrary` with the module handle
-5. Waits for completion
-
-### Architecture Detection
-
-The tool uses Windows API functions to detect process architecture:
-- `IsWow64Process` - Determines if a process is running under WOW64 (32-bit on 64-bit Windows)
-- Processes are marked as x64 if they're native 64-bit
-- Processes are marked as x86 if they're 32-bit
 
 ## Common Issues
 
-### "Failed to open process"
+### "Access Denied" or "Failed to open process"
 - Make sure you're running as Administrator
-- The target process may have higher privileges
-- Some system processes cannot be injected
+- Some system processes cannot be injected into
+- Antivirus may block injection attempts
 
-### "Architecture mismatch"
-- You're trying to inject an x86 DLL into an x64 process (or vice versa)
-- Use the correct build of the injector (x64 for x64 processes, x86 for x86 processes)
+### "Architecture mismatch" warning
+- You're using the wrong injector build
+- Use x64 injector for x64 processes
+- Use x86 injector for x86 processes
 
-### "DLL file does not exist"
-- Check that the DLL path is correct
-- Use absolute paths (e.g., `C:\path\to\your.dll`)
-- Ensure the DLL file exists and is accessible
+### "DLL not found" during injection
+- Verify the DLL path is correct
+- Use absolute paths
+- Ensure the DLL file exists
 
-### "Failed to inject DLL" / "LoadLibraryW failed"
-- The DLL may have dependencies that aren't available in the target process
-- The DLL may not be compatible with the target process
-- Check that the DLL architecture matches the target process
+### "LoadLibraryW failed in target process"
+- The DLL may have missing dependencies
+- The DLL architecture may not match the process
+- The DLL may have initialization errors
 
-### "DLL not found in target process"
-- The DLL name must match exactly (case-insensitive)
-- Include the `.dll` extension
-- The DLL may have already been unloaded
+### Application doesn't start
+- Ensure Visual C++ Redistributable is installed
+- Check Windows Event Viewer for error details
 
 ## Security Notes
 
-- This tool requires Administrator privileges
-- Only inject DLLs into processes you own or have permission to modify
+⚠️ **Important Security Information:**
+- Requires Administrator privileges
+- Only inject into processes you own/have permission to modify
 - Be careful with system processes
-- Some antivirus software may flag DLL injectors as potentially unwanted
+- Some antivirus software may flag DLL injectors
+
+## Legitimate Use Cases
+
+This tool is intended for:
+- 🔧 Debugging your own applications
+- 🎮 Modding games you own
+- 🛠️ Development and testing
+- 🔍 Security research in controlled environments
 
 ## License
 
@@ -215,10 +230,4 @@ This project is provided as-is for educational and legitimate development purpos
 
 ## Disclaimer
 
-This tool is intended for legitimate purposes such as:
-- Debugging your own applications
-- Modding games you own
-- Development and testing
-- Security research in controlled environments
-
-Do not use this tool for malicious purposes or to inject into software you don't have permission to modify.
+Do not use this tool for malicious purposes or to inject into software you don't have permission to modify. The developers are not responsible for misuse of this software.

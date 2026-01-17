@@ -2,7 +2,7 @@
 setlocal enabledelayedexpansion
 
 echo ========================================
-echo   DLL Injector Build Script
+echo   DLL Injector GUI Build Script
 echo ========================================
 echo.
 
@@ -39,7 +39,7 @@ cmake -S . -B build-x64 -G "Visual Studio 16 2019" -A x64
 cmake --build build-x64 --config Debug
 echo.
 echo x64 Debug build complete!
-echo Output: build-x64\bin\Debug\DllInjector.exe
+echo Output: build-x64\bin\Debug\DllInjectorGUI.exe
 pause
 goto menu
 
@@ -50,7 +50,7 @@ cmake -S . -B build-x64 -G "Visual Studio 16 2019" -A x64
 cmake --build build-x64 --config Release
 echo.
 echo x64 Release build complete!
-echo Output: build-x64\bin\Release\DllInjector.exe
+echo Output: build-x64\bin\Release\DllInjectorGUI.exe
 pause
 goto menu
 
@@ -61,7 +61,7 @@ cmake -S . -B build-x86 -G "Visual Studio 16 2019" -A Win32
 cmake --build build-x86 --config Debug
 echo.
 echo x86 Debug build complete!
-echo Output: build-x86\bin\Debug\DllInjector.exe
+echo Output: build-x86\bin\Debug\DllInjectorGUI.exe
 pause
 goto menu
 
@@ -72,7 +72,7 @@ cmake -S . -B build-x86 -G "Visual Studio 16 2019" -A Win32
 cmake --build build-x86 --config Release
 echo.
 echo x86 Release build complete!
-echo Output: build-x86\bin\Release\DllInjector.exe
+echo Output: build-x86\bin\Release\DllInjectorGUI.exe
 pause
 goto menu
 

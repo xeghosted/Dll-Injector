@@ -93,30 +93,6 @@
             "group": "build",
             "dependsOn": "Configure CMake (x86)",
             "problemMatcher": ["$msCompile"]
-        },
-        {
-            "label": "Clean x64",
-            "type": "shell",
-            "command": "cmake",
-            "args": [
-                "--build",
-                "${workspaceFolder}/build-x64",
-                "--target",
-                "clean"
-            ],
-            "problemMatcher": []
-        },
-        {
-            "label": "Clean x86",
-            "type": "shell",
-            "command": "cmake",
-            "args": [
-                "--build",
-                "${workspaceFolder}/build-x86",
-                "--target",
-                "clean"
-            ],
-            "problemMatcher": []
         }
     ]
 }
