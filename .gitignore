@@ -1,0 +1,48 @@
+# Build directories
+build/
+build-x86/
+build-x64/
+out/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.sdf
+*.opensdf
+*.VC.db
+*.VC.opendb
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+*.cmake
+!CMakeLists.txt
+
+# Executables
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Object files
+*.o
+*.obj
+
+# Libraries
+*.lib
+*.a
+
+# Precompiled Headers
+*.pch
+
+# Logs
+*.log
+
+# IDE
+.vscode/settings.json.user
+
+# OS
+.DS_Store
+Thumbs.db

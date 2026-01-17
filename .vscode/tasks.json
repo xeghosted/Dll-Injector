@@ -1,0 +1,122 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Configure CMake (x64)",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "-S",
+                "${workspaceFolder}",
+                "-B",
+                "${workspaceFolder}/build-x64",
+                "-G",
+                "Visual Studio 16 2019",
+                "-A",
+                "x64"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Configure CMake (x86)",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "-S",
+                "${workspaceFolder}",
+                "-B",
+                "${workspaceFolder}/build-x86",
+                "-G",
+                "Visual Studio 16 2019",
+                "-A",
+                "Win32"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Build x64 Debug",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "${workspaceFolder}/build-x64",
+                "--config",
+                "Debug"
+            ],
+            "group": "build",
+            "dependsOn": "Configure CMake (x64)",
+            "problemMatcher": ["$msCompile"]
+        },
+        {
+            "label": "Build x64 Release",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "${workspaceFolder}/build-x64",
+                "--config",
+                "Release"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "dependsOn": "Configure CMake (x64)",
+            "problemMatcher": ["$msCompile"]
+        },
+        {
+            "label": "Build x86 Debug",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "${workspaceFolder}/build-x86",
+                "--config",
+                "Debug"
+            ],
+            "group": "build",
+            "dependsOn": "Configure CMake (x86)",
+            "problemMatcher": ["$msCompile"]
+        },
+        {
+            "label": "Build x86 Release",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "${workspaceFolder}/build-x86",
+                "--config",
+                "Release"
+            ],
+            "group": "build",
+            "dependsOn": "Configure CMake (x86)",
+            "problemMatcher": ["$msCompile"]
+        },
+        {
+            "label": "Clean x64",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "${workspaceFolder}/build-x64",
+                "--target",
+                "clean"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "Clean x86",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "${workspaceFolder}/build-x86",
+                "--target",
+                "clean"
+            ],
+            "problemMatcher": []
+        }
+    ]
+}
